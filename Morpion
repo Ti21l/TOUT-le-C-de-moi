@@ -1,0 +1,236 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <math.h>
+#define TAILLE 3
+#define TAILLE_TABLEAU TAILLE*TAILLE
+
+bool lign_verif(char table[]);
+bool column_verif(char table[]);
+bool daigonal_verif(char table[]);
+
+
+//Le programme contient un seul fichier avec 5 fonctions en plus du main :
+// Fonction : afficher_table
+// La fonction affiche les nbmax caractères du tableau carré 3 x 3
+void afficher_table(char table[])
+{
+    int cpt = 1;
+    for(int i = 0 ; i <= TAILLE_TABLEAU ; i++ )
+    {
+        printf("%c ",table[i]);
+
+        if(cpt%TAILLE==0){
+
+            printf("\n");
+        }
+        cpt ++ ;
+    }
+}
+// Fonction : insere_symbole
+// La fonction insere_symbole gère les emplacements vide sur le plateau de jeu
+// Elle insère le symbole du joueur dans table sous certaines conditions (Emplacement valide et libre)
+// La fonction renvoie vrai si l'insertion a lieu et false dans le cas contraire
+
+
+bool insere_symbole(char table[],char *symbole)
+{
+    int spot=0;
+
+    printf("Emplacement ?");
+    scanf("%d",&spot);
+
+    if(spot<1 || spot>9)
+    {
+        printf("emplacement invalide");
+        insere_symbole(table,symbole);
+
+    }
+    else{
+
+        for(int i = 1 ; i <= 9 ;i++)
+        {
+            if(i==spot)
+            {
+                table[i-1]=symbole;
+
+                return true;
+            }
+        }
+    }
+
+
+
+}
+
+// Fonction : permute_symbole
+// La fonction permute_symbole gère l'alternance du symbole des joueurs
+
+
+void permute_symbole(char *symbole){
+
+    printf("||%c||",symbole);
+
+    if(*symbole == 'X')
+    {
+        *symbole = 'O';
+    }
+    else
+    {
+        *symbole = 'X';
+    }
+
+}
+
+
+// Fonction : verif_victoire
+// La fonction verif_victoire vérifie la victoire sur les lignes, les colonnes et les diagonales
+// Si le dernier joueur est victorieux, la fonction retourne true sinon elle retourne false
+
+
+
+bool verif_victoire(char table[])
+{
+
+
+
+        if(lign_verif(table)==true)
+        {
+            afficher_table(table);
+            printf("victoire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            return 0 ;
+        }
+          if(column_verif(table)==true)
+        {
+            afficher_table(table);
+            printf("victoire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            return 0 ;
+        }
+        if(daigonal_verif(table) == true)
+        {
+
+            afficher_table(table);
+            printf("victoire !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            return 0;
+        }
+
+
+
+return false;
+
+}
+
+
+bool lign_verif(char table[])
+{
+    int cpt = 1;
+    for(int i = 0 ; i < TAILLE_TABLEAU ; i = i + TAILLE )
+    {
+
+        for( int j = 0 ; j < TAILLE-1 ; j ++ )
+        {
+            if(table[i+j]==table[i+j+1] && table[j+i]!='-')
+            {
+                cpt++;
+            }
+            else
+            {
+                cpt = 1;
+            }
+            if(cpt==TAILLE)
+            {
+                return true ;
+            }
+        }
+
+    }
+    return false;
+}
+
+
+bool column_verif(char table[])
+{
+        int cpt = 1;
+    for(int i = 0 ; i < TAILLE ; i++ )
+    {
+
+        for( int j = 0 ; j < TAILLE_TABLEAU ; j+=TAILLE )
+
+        {
+            if(table[i+j]==table[i+j+TAILLE] && table[j+i]!='-')
+            {
+                cpt++;
+            }
+            else
+            {
+                cpt = 1;
+            }
+            if(cpt==TAILLE)
+            {
+                return true ;
+            }
+        }
+
+    }
+    return false;
+}
+
+
+bool daigonal_verif(char table[])
+{
+
+    if(table[0] == table[4] && table[4] == table[8] && table[0]!='-')
+    {
+        return true ;
+    }
+    if(table[2] == table[4] && table[4] == table[6] &&  table[2]!='-')
+    {
+        return true ;
+    }
+
+
+    return false;
+}
+
+
+// Fonction : verif_nul
+// La fonction verif_nul vérifie si le nombre de coup joué atteint le nombre de cases
+bool verif_nul(int turn_count){}
+
+
+
+
+int main()
+{
+    char table[TAILLE_TABLEAU];
+
+
+    char * symbole = 'X';
+    int i=0;
+
+    while(i<=TAILLE_TABLEAU)
+    {
+        table[i]='-';
+        i++;
+    }
+
+
+    for(int i = 0 ; i < 9 ; i++)
+    {
+        printf("Tour %d : \n",i);
+        printf("Emplacements : \n 1 2 3\n 4 5 6\n 7 8 9 \n");
+
+        afficher_table(table);
+        insere_symbole(table,symbole);
+
+        permute_symbole(&symbole);
+        verif_victoire(table);
+
+
+
+    }
+
+
+
+}
+
