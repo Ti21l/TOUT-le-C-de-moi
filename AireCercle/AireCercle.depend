@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1662388973 source:e:\dev\codeblocks\airecercle\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tools.h"
+
+1662388360 e:\dev\codeblocks\airecercle\tools.h
+	<stdbool.h>
+
+1662388992 source:e:\dev\codeblocks\airecercle\tools.c
+
+1662386815 e:\dev\codeblocks\airecercle\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tools.h"
+

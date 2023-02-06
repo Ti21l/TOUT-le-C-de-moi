@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1664466799 source:c:\users\hal\desktop\codeblocks_projects\dev\séance4_lastex\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

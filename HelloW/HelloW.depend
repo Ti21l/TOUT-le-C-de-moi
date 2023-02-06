@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1662382502 source:e:\dev\codeblocks\hellow\tools.c
+	"tools.h"
+
+1662378128 source:e:\dev\codeblocks\hellow\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+
+1662379826 e:\dev\codeblocks\hellow\tools.h
+	<stdbool.h>
+
